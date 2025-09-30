@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Alert } from "react-native";
-import { updateProdutos } from "./Api";
+import { updateProdutos } from "../services/Api";
 
 export default function Alterar({ route, navigation }) {
-  const { produtos } = route.params;
-  const [nome, setNome] = useState(produtos.nome);
-  const [marca, setMarca] = useState(produtos.marca);
-  const [preco, setPreco] = useState(produtos.preco);
+  const produtos = route.params; // ou verifique o nome correto
+
+  const [nome, setNome] = useState(produtos.nome || "");
+  const [marca, setMarca] = useState(produtos.marca || "");
+  const [preco, setPreco] = useState(produtos.preco || "");
 
   const handleUpdate = () => {
-    const updatedData = {
-      nome,
-      marca,
-      preco,
-    };
+    const updatedData = { nome, marca, preco };
 
     Alert.alert(
       "Confirmação",
@@ -27,12 +24,11 @@ export default function Alterar({ route, navigation }) {
       ]
     );
   };
-
   return (
     <View>
-      <TextInput placeholder="Produto" value={nome} onChandeText={setNome} />
-      <TextInput placeholder="Marca" value={marca} onChandeText={setMarca} />
-      <TextInput placeholder="Preco" value={preco} onChandeText={setPreco} />
+      <TextInput placeholder="Produto" value={nome} onChangeText={setNome} />
+      <TextInput placeholder="Marca" value={marca} onChangeText={setMarca} />
+      <TextInput placeholder="Preco" value={preco} onChangeText={setPreco} />
 
       <Button title="Alterar" onPress={handleUpdate} />
     </View>

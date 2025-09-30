@@ -1,10 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../componentes/Home';
-import SplashScreen from '../componentes/SplashScreen';
-import Cadastro from '../componentes/Cadastro';
-import Alterar from '../componentes/Alterar';
+import Home from '../Componentes/Home';
+import SplashScreen from '../Componentes/SplashScreen';
+import Alterar from '../Componentes/Alterar';
+import Cadastro from '../Componentes/Cadastro';
+
 
 const Stack = createStackNavigator();
 

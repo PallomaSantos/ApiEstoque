@@ -1,4 +1,4 @@
-const API_URL = 'https://siteapi/';
+const API_URL = 'https://apiestoque.webapptech.site/api/produtos';
 import { Alert } from 'react-native';
 
 export const fetchEstoque = async (setRegistros) => {
@@ -18,7 +18,7 @@ export const fetchEstoque = async (setRegistros) => {
 
 export const createEstoque = async (EstoqueData) => {
   try {
-    const response = await fetch('https://siteapi/', {
+    const response = await fetch('https://apiestoque.webapptech.site/api/produtos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export const createEstoque = async (EstoqueData) => {
 
 export const deleteEstoque = async (EstoqueId, setRegistros) => {
   try {
-    const response = await fetch(`https://siteapi/${EstoqueId}`, {
+    const response = await fetch(`https://apiestoque.webapptech.site/api/produtos${EstoqueId}`, {
       method: 'DELETE',
     });
 
@@ -98,7 +98,7 @@ export const deleteEstoque = async (EstoqueId, setRegistros) => {
 
 export const updateEstoque = async (EstoqueId, updatedData, navigation) => {
   try {
-    const response = await fetch(`https://siteapi/${EstoqueId}`, {
+    const response = await fetch(`https://apiestoque.webapptech.site/api/produtos${EstoqueId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

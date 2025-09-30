@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Alert, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, Text, IconButton } from 'react-native-paper';
-import { fetchEstoque, deleteEstoque } from './Api';
+import { fetchEstoque, deleteEstoque } from '../services/Api';
 
 export default function Home({ navigation }) {
-    const [registro, setRegistros] = useState([]);
+    const [registros, setRegistros] = useState([]);
 
     useEffect(() => {
         fetchEstoque(setRegistros);
@@ -26,11 +26,11 @@ export default function Home({ navigation }) {
     return (
         <View style={StyleSheet.container}>
             <FlatList
-                data={registro}
+                data={registros}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <Card style={style.card}>
-                        <View style={style.cardContent}>
+                    <Card style={styles.card}>
+                        <View style={styles.cardContent}>
                             {/* Coluna da esquerda: texto */}
                             <View style={StyleSheet.infoColumn}>
                                 <Text style={StyleSheet.title}>Código: {item.id}</Text>

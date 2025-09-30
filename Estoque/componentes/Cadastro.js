@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, Button, Alert } from "react-native";
-import { createProdutos } from "./Api";
+import { createProdutos, updateProdutos, fetchEstoque } from "../services/Api";
 
 export default function Cadastro({ navigation }) {
-  const [registro, setRegistros] = useState([]);
+  const [registros, setRegistros] = useState([]);
+  const [selectedProdutoId, setSelectedProdutoId] = useState(null);
   const [nome, setNome] = useState("");
   const [marca, setMarca] = useState("");
   const [preco, setPreco] = useState("");
 
-    useEffect(() => {
-        fetchEstoque(setRegistros);
-    }, []);
+  useEffect(() => {
+    fetchEstoque(setRegistros);
+  }, []);
 
   const handleSubmit = async () => {
     if (!nome || !marca || !preco) {
-      Alert.alert("Atenção", "Preencha tododos os campos antes de cadastrar.");
+      Alert.alert("Atenção", "Preencha todos os campos antes de cadastrar.");
       return;
     }
 
@@ -22,7 +23,7 @@ export default function Cadastro({ navigation }) {
 
     if (selectedProdutoId) {
       await updateProdutos(selectedProdutoId, newProduto);
-      selectedProdutoId(null);
+      setSelectedProdutoId(null);
     } else {
       const addedProduto = await createProdutos(newProduto);
       if (addedProduto) {
@@ -39,9 +40,14 @@ export default function Cadastro({ navigation }) {
 
   return (
     <View>
-      <TextInput placeholder="Produto" value={nome} onChandeText={setNome} />
-      <TextInput placeholder="Marca" value={marca} onChandeText={setMarca} />
-      <TextInput placeholder="Preco" value={preco} onChandeText={setPreco} />
+      <TextInput placeholder="Produto" value={nome} onChangeText={setNome} />
+      <TextInput placeholder="Marca" value={marca} onChangeText={setMarca} />
+      <TextInput
+    placeholder="Preco"
+    value={preco}
+    onChangeText={setPreco}
+    keyboardType="numeric"/>
+
 
       <Button title="Cadastrar" onPress={handleSubmit} />
     </View>
